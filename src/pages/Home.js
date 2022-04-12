@@ -5,7 +5,7 @@ import DataSet from '../components/DataSet'
 
 const Home = () => {
   const [randomNumber,setRandomNumber]=useState(1)
-  const [data,setData]=useState(dataset[randomNumber].data)
+  const [data,setData]=useState([])
   const [mean,setMean]=useState(0)
   const [median,setMedian]=useState(0)
   const [StdDev,setStdDev]=useState(0)
@@ -18,7 +18,8 @@ const Home = () => {
     calculateMedian()
     calculateDeviation()
     calculateMode()
-  },[data])
+    setData(dataset[randomNumber].data)
+    },[data,randomNumber])
 
 
 // Mean
@@ -80,13 +81,17 @@ const Home = () => {
   }
  
   const handleClick=()=>{
-    setRandomNumber(Math.floor(Math.random() * 10))
-    if(randomNumber < 10){
-    console.log(randomNumber)
-    setData(dataset[randomNumber].data)
+     if(randomNumber<8){
+       setRandomNumber(randomNumber+1)
+       console.log(randomNumber)
+     }
+     else if(randomNumber>=7){
+       setRandomNumber(0)
+       console.log(randomNumber)
+     }
   }
-  }
-
+ 
+  console.log(data)
   return (
     <div className='stat'>
       <div className='stat-wrapper'>
